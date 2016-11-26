@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/adduser"
+        android:icon="@drawable/adduser"
+        android:title="친구추가"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/userman"
+        android:icon="@drawable/userman"
+        android:title="친구추가"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/chatting"
+        android:icon="@drawable/chatting"
+        android:title="친구추가"
+        app:showAsAction="always" />
+
+
+</menu>
