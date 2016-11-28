@@ -57,7 +57,7 @@ public class MainActivity_talk extends AppCompatActivity {
         plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getBaseContext(),"안녕",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(),"친구 초대 화면으로 이동",Toast.LENGTH_SHORT).show();
 
                 Intent intent=new Intent(getApplicationContext(),Friend_MainActivity.class);
                 startActivity(intent);

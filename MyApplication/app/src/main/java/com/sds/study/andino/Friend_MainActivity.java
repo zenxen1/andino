@@ -1,10 +1,14 @@
 package com.sds.study.andino;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -14,16 +18,17 @@ public class Friend_MainActivity extends AppCompatActivity {
     private FriendAdapter gAdapter = null;
     private ListView listView=null;
     Toolbar toolbar;
+    ImageView invite_back;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.friend_activity_main);
-        toolbar=(Toolbar)findViewById(R.id.my_toolbar);
+        //toolbar=(Toolbar)findViewById(R.id.my_toolbar);
 
 
-        setSupportActionBar(toolbar);
+      //  setSupportActionBar(toolbar);
 
         gAdapter = new FriendAdapter(this);
         gAdapter.addItem(new FriendData(R.drawable.i1,"강미나"));
@@ -49,7 +54,18 @@ public class Friend_MainActivity extends AppCompatActivity {
         listView.setAdapter(gAdapter);
 
 
+        invite_back=(ImageView)findViewById(R.id.invite_back);
 
+
+
+        invite_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(),"전 페이지로 이동",Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(getApplicationContext(),MainActivity_talk.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
