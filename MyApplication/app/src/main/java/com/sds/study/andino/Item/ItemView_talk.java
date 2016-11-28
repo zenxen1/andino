@@ -1,4 +1,4 @@
-package com.sds.study.andino;
+package com.sds.study.andino.Item;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,6 +6,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.sds.study.andino.model.dto.FriendData_talk;
+import com.sds.study.andino.R;
 
 /**
  * Created by 김승현 on 2016-11-10.

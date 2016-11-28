@@ -1,9 +1,12 @@
-package com.sds.study.andino;
+package com.sds.study.andino.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
+
+import com.sds.study.andino.R;
+import com.sds.study.andino.RoundProfile;
 
 
 /**

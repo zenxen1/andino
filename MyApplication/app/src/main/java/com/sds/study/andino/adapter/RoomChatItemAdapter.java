@@ -1,9 +1,11 @@
-package com.sds.study.andino;
+package com.sds.study.andino.adapter;
 
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+
+import com.sds.study.andino.Item.RoomChatItem;
 
 /**
  * Created by lee on 2016-11-26.

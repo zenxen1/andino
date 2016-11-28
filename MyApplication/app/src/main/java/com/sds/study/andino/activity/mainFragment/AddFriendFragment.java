@@ -1,4 +1,4 @@
-package com.sds.study.andino;
+package com.sds.study.andino.activity.mainFragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,6 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.sds.study.andino.adapter.AddFriendItemAdapter;
+import com.sds.study.andino.R;
 
 /**
  * Created by song_kang on 2016-11-27.

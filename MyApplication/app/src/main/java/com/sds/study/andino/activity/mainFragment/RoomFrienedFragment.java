@@ -1,4 +1,4 @@
-package com.sds.study.andino;
+package com.sds.study.andino.activity.mainFragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import com.sds.study.andino.R;
+import com.sds.study.andino.adapter.RoomFriendItemAdapter;
 
 /**
  * Created by lee on 2016-11-26.
