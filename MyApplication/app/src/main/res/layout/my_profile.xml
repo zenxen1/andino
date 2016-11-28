@@ -66,7 +66,7 @@
         android:layout_below="@+id/linearLayout"
         android:layout_gravity="center"
         android:layout_weight="3.86"
-        android:background="@drawable/win_20160923_16_35_48_pro"
+        android:background="@drawable/kr"
         android:foregroundGravity="center">
 
         <ImageView
