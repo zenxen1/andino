@@ -16,7 +16,7 @@ import android.widget.Toast;
 public class JsActivity extends AppCompatActivity {
     ListView listView;
     BaloonAdapter baloonAdapter;
-    ImageView js_to_invite;
+    ImageView js_to_invite, js_chat_back;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +26,7 @@ public class JsActivity extends AppCompatActivity {
         listView.setAdapter(baloonAdapter);
 
         js_to_invite=(ImageView)findViewById(R.id.js_to_invite);
-
+        js_chat_back=(ImageView)findViewById(R.id.js_chat_back);
         js_to_invite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -35,6 +35,16 @@ public class JsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        js_chat_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),RoomActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
 
     }
 }

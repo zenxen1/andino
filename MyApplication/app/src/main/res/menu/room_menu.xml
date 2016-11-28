@@ -15,7 +15,7 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/chatting"
+        android:id="@+id/chatting22"
         android:icon="@drawable/chatting"
         android:title="친구추가"
         app:showAsAction="always" />

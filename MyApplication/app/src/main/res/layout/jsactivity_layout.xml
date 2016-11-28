@@ -10,7 +10,7 @@
         android:background="#7300ff">
 
         <ImageView
-            android:id="@+id/js_back"
+            android:id="@+id/js_chat_back"
             android:src="@drawable/back"
             android:layout_weight="2"
             android:layout_width="0dp"
