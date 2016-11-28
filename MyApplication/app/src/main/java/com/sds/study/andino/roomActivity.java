@@ -11,7 +11,7 @@ import android.view.MenuItem;
  * Created by lee on 2016-11-25.
  */
 
-public class roomActivity extends AppCompatActivity {
+public class RoomActivity extends AppCompatActivity {
     Toolbar room_toolbar;
     ViewPager roomPage;
     RoomPagerAdapter roomPagerAdapter;

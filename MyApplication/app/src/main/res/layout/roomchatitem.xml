@@ -7,20 +7,20 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="2"
-        android:src="@drawable/userman"/>
+        android:src="@drawable/chatting"/>
 
     <TextView
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="6"
-        android:text="방사능토토로"
+        android:text="채팅방이름"
         android:gravity="center"/>
 
     <TextView
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="2"
-        android:text="초심으로"
+        android:text="시간"
         android:gravity="center"/>
 
 </LinearLayout>
