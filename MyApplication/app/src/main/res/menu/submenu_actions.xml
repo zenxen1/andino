@@ -4,12 +4,10 @@
     <item
         android:id="@+id/renameit"
         android:title="채팅방 이름 설정"
-        android:menuCategory="container"
         android:orderInCategory="1"/>
     <item
         android:id="@+id/favorite"
         android:title="즐겨찾기 등록"
-        android:menuCategory="container"
         android:orderInCategory="2"/>
     <item
         android:id="@+id/fixitontop"

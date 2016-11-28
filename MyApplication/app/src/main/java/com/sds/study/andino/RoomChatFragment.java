@@ -37,7 +37,7 @@ public class RoomChatFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(context, "채팅화면으로 이동!!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(context, JsActivity.class);
+                Intent intent = new Intent(context, ChatActivity.class);
                 startActivity(intent);
             }
         });
