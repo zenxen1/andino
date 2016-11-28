@@ -9,12 +9,14 @@ import android.support.v4.app.FragmentStatePagerAdapter;
  */
 
 public class RoomPagerAdapter extends FragmentStatePagerAdapter {
-    Fragment[] fragments = new Fragment[2];
+    Fragment[] fragments = new Fragment[3];
 
     public RoomPagerAdapter(FragmentManager fm) {
         super(fm);
-        fragments[0]=new RoomFrienedFragment();
-        fragments[1]=new RoomChatFragment();
+        fragments[0]=new AddFriendFragment();
+        fragments[1]=new RoomFrienedFragment();
+        fragments[2]=new RoomChatFragment();
+
     }
 
     @Override
