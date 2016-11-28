@@ -38,6 +38,17 @@ public class RoomActivity extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_adduser:
+                roomPage.setCurrentItem(0);
+                break;
+            case R.id.menu_userman:
+                roomPage.setCurrentItem(1);
+                break;
+            case R.id.menu_chatting:
+                roomPage.setCurrentItem(2);
+                break;
+        }
         return super.onOptionsItemSelected(item);
     }
 }
