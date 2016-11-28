@@ -1,10 +1,13 @@
-package com.sds.study.andino;
+package com.sds.study.andino.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+
+import com.sds.study.andino.model.dto.FriendData_talk;
+import com.sds.study.andino.Item.ItemView_talk;
 
 import java.util.ArrayList;
 

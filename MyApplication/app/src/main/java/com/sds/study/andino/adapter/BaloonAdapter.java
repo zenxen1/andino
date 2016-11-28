@@ -1,9 +1,14 @@
-package com.sds.study.andino;
+package com.sds.study.andino.adapter;
 
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+
+import com.sds.study.andino.Item.ItemLeftBaloon;
+import com.sds.study.andino.Item.ItemRightBaloon;
+import com.sds.study.andino.activity.ChatActivity;
+import com.sds.study.andino.model.dto.Speech;
 
 import java.util.ArrayList;
 

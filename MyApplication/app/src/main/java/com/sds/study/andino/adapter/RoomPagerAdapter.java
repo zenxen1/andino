@@ -1,8 +1,12 @@
-package com.sds.study.andino;
+package com.sds.study.andino.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+
+import com.sds.study.andino.activity.mainFragment.AddFriendFragment;
+import com.sds.study.andino.activity.mainFragment.RoomChatFragment;
+import com.sds.study.andino.activity.mainFragment.RoomFrienedFragment;
 
 /**
  * Created by lee on 2016-11-26.

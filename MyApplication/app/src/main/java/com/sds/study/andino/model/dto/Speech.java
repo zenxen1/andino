@@ -1,4 +1,4 @@
-package com.sds.study.andino;
+package com.sds.study.andino.model.dto;
 
 /**
  * Created by efro2 on 2016-11-25.

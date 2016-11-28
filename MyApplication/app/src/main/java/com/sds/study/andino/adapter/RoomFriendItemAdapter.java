@@ -1,25 +1,27 @@
-package com.sds.study.andino;
+package com.sds.study.andino.adapter;
 
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.sds.study.andino.Item.RoomFriendItem;
+
 /**
- * Created by song_kang on 2016-11-27.
+ * Created by lee on 2016-11-26.
  */
 
-public class AddFriendItemAdapter extends BaseAdapter{
+public class RoomFriendItemAdapter extends BaseAdapter{
     Context context;
 
-    public AddFriendItemAdapter(Context context) {
-        this.context = context;
+    public RoomFriendItemAdapter(Context context) {
+        this.context=context;
 
     }
 
     @Override
     public int getCount() {
-        return 12;
+        return 9;
     }
 
     @Override
@@ -36,10 +38,10 @@ public class AddFriendItemAdapter extends BaseAdapter{
     public View getView(int i, View convertView, ViewGroup viewGroup) {
         View view = null;
         if(convertView == null){
-            AddFriendItem item = new AddFriendItem(context);
+            RoomFriendItem item = new RoomFriendItem(context);
             view = item;
         }else{
-            AddFriendItem item = (AddFriendItem)convertView;
+            RoomFriendItem item = (RoomFriendItem)convertView;
             view = item;
         }
         return view;

@@ -1,4 +1,4 @@
-package com.sds.study.andino;
+package com.sds.study.andino.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.sds.study.andino.adapter.FriendAdapter_talk;
+import com.sds.study.andino.model.dto.FriendData_talk;
+import com.sds.study.andino.R;
 
 import java.util.ArrayList;
 
