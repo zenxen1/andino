@@ -11,7 +11,7 @@ import android.view.MenuItem;
  * Created by lee on 2016-11-25.
  */
 
-public class roomActivity extends AppCompatActivity {
+public class RoomActivity extends AppCompatActivity {
     Toolbar room_toolbar;
     ViewPager roomPage;
     RoomPagerAdapter roomPagerAdapter;
@@ -38,6 +38,17 @@ public class roomActivity extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_adduser:
+                roomPage.setCurrentItem(0);
+                break;
+            case R.id.menu_userman:
+                roomPage.setCurrentItem(1);
+                break;
+            case R.id.menu_chatting:
+                roomPage.setCurrentItem(2);
+                break;
+        }
         return super.onOptionsItemSelected(item);
     }
 }

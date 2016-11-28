@@ -13,9 +13,9 @@ public class RoomPagerAdapter extends FragmentStatePagerAdapter {
 
     public RoomPagerAdapter(FragmentManager fm) {
         super(fm);
-        fragments[0]=new AddFriendFragment();
-        fragments[1]=new RoomFrienedFragment();
-        fragments[2]=new RoomChatFragment();
+        fragments[0]=new AddFriendFragment(); //친구추가
+        fragments[1]=new RoomFrienedFragment(); //친구리스트
+        fragments[2]=new RoomChatFragment(); //채팅방
 
     }
 
