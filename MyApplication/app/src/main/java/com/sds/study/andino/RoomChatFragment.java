@@ -15,6 +15,9 @@ public class RoomChatFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.roomchatfragment,null);
+
+
+
         return view;
     }
 }
