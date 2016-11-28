@@ -1,10 +1,14 @@
-package com.sds.study.andino;
+package com.sds.study.andino.adapter;
 
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Spinner;
+
+import com.sds.study.andino.Item.ItemLeftBaloon;
+import com.sds.study.andino.Item.ItemRightBaloon;
+import com.sds.study.andino.activity.ChatActivity;
+import com.sds.study.andino.model.dto.Speech;
 
 import java.util.ArrayList;
 
@@ -14,10 +18,10 @@ import java.util.ArrayList;
 
 public class BaloonAdapter extends BaseAdapter {
     ArrayList<Speech> list=new ArrayList<Speech>();
-    JsActivity jsActivity;
+    ChatActivity chatActivity;
     String TAG;
-    public BaloonAdapter(JsActivity jsActivity) {
-        this.jsActivity = jsActivity;
+    public BaloonAdapter(ChatActivity chatActivity) {
+        this.chatActivity = chatActivity;
         TAG=getClass().getName();
         Speech speech = new Speech();
         speech.setId("지석");
@@ -49,10 +53,10 @@ public class BaloonAdapter extends BaseAdapter {
         Speech dto=(Speech) list.get(i);
         if(0==(i%2.0)){
             Log.d(TAG,"1");
-            view=new ItemRightBaloon(jsActivity,dto);
+            view=new ItemRightBaloon(chatActivity,dto);
         }else {
             Log.d(TAG,"2");
-            view=new ItemLeftBaloon(jsActivity,dto);
+            view=new ItemLeftBaloon(chatActivity,dto);
         }
         return view;
     }

@@ -1,4 +1,4 @@
-package com.sds.study.andino;
+package com.sds.study.andino.activity;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -6,6 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+
+import com.sds.study.andino.R;
+import com.sds.study.andino.adapter.RoomPagerAdapter;
 
 /**
  * Created by lee on 2016-11-25.
@@ -15,6 +19,7 @@ public class RoomActivity extends AppCompatActivity {
     Toolbar room_toolbar;
     ViewPager roomPage;
     RoomPagerAdapter roomPagerAdapter;
+    ImageView chatting;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +34,8 @@ public class RoomActivity extends AppCompatActivity {
         room_toolbar=(Toolbar)findViewById(R.id.room_toolbar);
         room_toolbar.setTitle("채팅");
         setSupportActionBar(room_toolbar);
+
+
     }
 
    /*메뉴부착*/
