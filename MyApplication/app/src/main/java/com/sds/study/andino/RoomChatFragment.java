@@ -18,10 +18,10 @@ public class RoomChatFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.roomchatfragment,null);
 
-
         ListView listView = (ListView)view.findViewById(R.id.list_view);
         roomChatItemAdapter = new RoomChatItemAdapter(getContext());
         listView.setAdapter(roomChatItemAdapter);
+
 
         return view;
     }

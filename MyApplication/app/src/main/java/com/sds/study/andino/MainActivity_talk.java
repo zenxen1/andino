@@ -18,7 +18,8 @@ public class MainActivity_talk extends AppCompatActivity {
     private FriendAdapter_talk gAdapter = null;
     private ListView listView = null;
     Toolbar toolbar;
-    ImageView plus;
+    ImageView plus, invite_back;
+
 
 
     @Override
@@ -53,6 +54,7 @@ public class MainActivity_talk extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.listView2);
         listView.setAdapter(gAdapter);
         plus=(ImageView)findViewById(R.id.plus);
+        invite_back=(ImageView)findViewById(R.id.invite_back);
 
         plus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +62,15 @@ public class MainActivity_talk extends AppCompatActivity {
                 Toast.makeText(getBaseContext(),"친구 초대 화면으로 이동",Toast.LENGTH_SHORT).show();
 
                 Intent intent=new Intent(getApplicationContext(),Friend_MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        invite_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getBaseContext(),"채팅화면으로 이동",Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(getApplicationContext(),JsActivity.class);
                 startActivity(intent);
             }
         });
