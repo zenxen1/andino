@@ -1,0 +1,11 @@
+create tablespace andino
+datafile 'C:\oraclexe\app\oracle\oradata\XE\andino.dbf'
+size 10m;
+
+create user andino
+identified by andino
+default tablespace andino
+quota unlimited on andino;
+
+grant create session, create table,
+create sequence to andino;

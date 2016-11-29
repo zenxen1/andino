@@ -1,0 +1,55 @@
+
+---- table and sequence create---------------------------------
+
+CREATE TABLE MEMBER
+(
+   member_id    NUMBER PRIMARY KEY,
+   m_id         VARCHAR2 (80) unique,
+   m_pwd        VARCHAR2 (80),
+   m_name       VARCHAR2 (20),
+   m_nickname   VARCHAR2 (40),
+   m_pic        VARCHAR2 (100),
+   m_status varchar2(50)
+);
+
+CREATE SEQUENCE seq_member START WITH 1 INCREMENT BY 1;
+
+CREATE TABLE friend
+(
+   friend_no   NUMBER PRIMARY KEY,
+   f_me        NUMBER,
+   f_you       NUMBER
+);
+
+CREATE SEQUENCE seq_friend START WITH 1 INCREMENT BY 1;
+
+create table room(
+room_no number primary key,
+r_registTime date default sysdate,
+r_captain number,
+r_title varchar2(100)
+);
+
+create sequence seq_room start with 1 increment by 1;
+
+create table roommate(
+roommate_no number primary key,
+rm_roomno number,
+rm_mateno number,
+rm_in varchar2(10) 
+constraint check_rm_in check(rm_in IN('true','false'))
+);
+
+create sequence seq_roommate start with 1 increment by 1;
+
+create table chat(
+chat_no number primary key,
+c_roomno number,
+c_msg varchar2(1000),
+c_me number,
+c_time date default sysdate
+);
+
+create sequence seq_chat start with 1 increment by 1;
+
+------------------------------------------------------------------
