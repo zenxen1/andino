@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -68,6 +69,13 @@ public class Friend_MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"전 페이지로 이동",Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(getApplicationContext(),MainActivity_talk.class);
                 startActivity(intent);
+            }
+        });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(getApplicationContext(),gAdapter.getItem(i)+"눌렀어?",Toast.LENGTH_SHORT).show();
             }
         });
 

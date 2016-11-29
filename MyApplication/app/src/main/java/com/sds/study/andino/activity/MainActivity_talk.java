@@ -4,12 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Layout;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.sds.study.andino.Item.ItemView_talk;
 import com.sds.study.andino.adapter.FriendAdapter_talk;
 import com.sds.study.andino.model.dto.FriendData_talk;
 import com.sds.study.andino.R;
@@ -22,7 +26,7 @@ public class MainActivity_talk extends AppCompatActivity {
     private FriendAdapter_talk gAdapter = null;
     private ListView listView = null;
     Toolbar toolbar;
-    ImageView plus, invite_back;
+    ImageView plus, invite_back, bell,bell2,star;
 
 
 
@@ -59,6 +63,9 @@ public class MainActivity_talk extends AppCompatActivity {
         listView.setAdapter(gAdapter);
         plus=(ImageView)findViewById(R.id.plus);
         invite_back=(ImageView)findViewById(R.id.invite_back);
+        bell=(ImageView)findViewById(R.id.bell);
+
+        star=(ImageView)findViewById(R.id.star);
 
         plus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +86,59 @@ public class MainActivity_talk extends AppCompatActivity {
             }
         });
 
+        bell.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getBaseContext(),"벨 눌렀어?",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        bell.setOnClickListener(new View.OnClickListener() {
+
+            boolean flag=false;
+            public void onClick(View view) {
+
+                if(!flag) {
+                    Toast.makeText(getBaseContext(),"알림켜기",Toast.LENGTH_SHORT).show();
+                    bell.setImageResource(R.drawable.bell2);
+                    flag=!flag;
+                }else{
+                    Toast.makeText(getBaseContext(),"알림끄기기",Toast.LENGTH_SHORT).show();
+                    bell.setImageResource(R.drawable.bell);
+                    flag=!flag;
+                }
+            }
+        });
+
+        star.setOnClickListener(new View.OnClickListener() {
+            boolean flag=false;
+            public void onClick(View view) {
+
+                if(!flag) {
+                    Toast.makeText(getBaseContext(),"즐겨찾기 방으로 설정",Toast.LENGTH_SHORT).show();
+                    star.setImageResource(R.drawable.star2);
+                    flag=!flag;
+                }else{
+                    Toast.makeText(getBaseContext(),"즐겨찾기 방으로 설정 해제",Toast.LENGTH_SHORT).show();
+                    star.setImageResource(R.drawable.star);
+                    flag=!flag;
+                }
+            }
+        });
+
+      /*  LinearLayout layout = (LinearLayout)findViewById(R.id.layout);
+
+        FriendData_talk friendData_talk=new FriendData_talk();
+        ItemView_talk itemView_talk = new ItemView_talk(this,friendData_talk);*/
+
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(getApplicationContext(),gAdapter.getItem(i)+"눌렀어?",Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
