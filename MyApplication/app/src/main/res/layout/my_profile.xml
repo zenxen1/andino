@@ -1,95 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.07"
-        android:orientation="horizontal">
-
-    </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1.46">
-
-    </RelativeLayout>
+        android:layout_height="0dp"
+        android:layout_weight="1.14"
+        android:orientation="vertical">
 
 
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="400dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/linearLayout"
-        android:layout_gravity="center"
-        android:layout_weight="3.86"
-        android:background="@drawable/profilebackgournd"
-        android:foregroundGravity="center">
-
-        <RelativeLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp"
+            android:layout_weight="1.74">
+
+            <ImageView
+                android:id="@+id/imgback"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/background1" />
+
 
             <com.sds.study.andino.RoundProfile
                 android:id="@+id/profile_pic"
                 android:layout_width="140dp"
                 android:layout_height="140dp"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:scaleType="centerCrop"
-                android:src="@drawable/userman"/>
+                android:layout_gravity="center"
+                android:translationY="155dp"
+                android:src="@drawable/kr" />
 
-        </RelativeLayout>
+        </FrameLayout>
 
-    </FrameLayout>
 
-    <RelativeLayout
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/profile_name"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="54dp"
+        android:gravity="center"
+        android:paddingTop="15dp"
+        android:text="Suk Hwan Hwang"
+        android:textSize="25sp" />
 
-        <TextView
-            android:id="@+id/profile_name"
-            android:layout_width="match_parent"
-            android:layout_height="54dp"
 
-            android:layout_above="@+id/imageButton1"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:gravity="center"
-            android:text="Suk Hwan Hwang"
-            android:textSize="25sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3"
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/imageButton2"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:id="@+id/self_chat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
+            android:paddingRight="40dp"
+            android:src="@drawable/profile_write" />
 
-
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="21dp"
-            android:layout_marginEnd="108dp"
-            android:layout_marginRight="108dp"
+        <ImageButton
+            android:id="@+id/bt_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
             android:src="@drawable/profile_setting" />
 
-        <ImageButton
-            android:id="@+id/imageButton1"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
 
-            android:layout_alignBottom="@+id/imageButton2"
-            android:layout_marginEnd="59dp"
-            android:layout_marginRight="59dp"
-            android:layout_toLeftOf="@+id/imageButton2"
-            android:layout_toStartOf="@+id/imageButton2"
-            android:src="@drawable/profile_write" />
-    </RelativeLayout>
-</RelativeLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

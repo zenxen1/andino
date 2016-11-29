@@ -19,6 +19,17 @@
         </activity>
         <activity android:name=".activity.Friend_MainActivity"></activity>
         <activity android:name=".activity.MainActivity_talk"></activity>
+        <activity android:name=".activity.MyProfileDetailActivity">
+
+        </activity>
+        <activity android:name=".activity.MyProfileActivity">
+
+
+        </activity>
+        <activity android:name=".activity.ProfileClick_detailActivity"></activity>
+        <activity android:name=".activity.PhotoFileExplorer">
+
+        </activity>
     </application>
 
 
