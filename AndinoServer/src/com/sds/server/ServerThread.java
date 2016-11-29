@@ -33,6 +33,7 @@ public class ServerThread extends Thread {
 	}
 
 	public void jsonAnalyzer(String data){
+		System.out.println(data);
 		JSONParser jsonParser=new JSONParser();
 		sb.setLength(0);
 		try {
@@ -41,7 +42,11 @@ public class ServerThread extends Thread {
 			switch(title){
 			case "chat":
 				String content=(String)jsonObject.get("content");
-				sb.append("f");
+				sb.append("{");
+				sb.append("\"title\":\"chat\",");
+				sb.append("\"content\":\""+jsonObject.get("content")+"\"");
+				sb.append("}");
+				serverMain.area.append((String) jsonObject.get("content")+"\n");
 				for(int i=0;i<serverMain.threadList.size();i++){
 					((ServerThread)serverMain.threadList.get(i)).sendMsg(content);
 				}
