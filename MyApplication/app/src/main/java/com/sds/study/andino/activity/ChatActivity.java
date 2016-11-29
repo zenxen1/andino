@@ -27,7 +27,7 @@ public class ChatActivity extends AppCompatActivity {
         //room_id,자신의 member_id,같이 채팅하는 사람들 id를 받아와서 db에서 이미지 정보등을 받아온다.
 
         //-------------------------------------------------------
-        setContentView(R.layout.jsactivity_layout);
+        setContentView(R.layout.chatactivity_layout);
         listView=(ListView)findViewById(R.id.listView);
         BaloonAdapter baloonAdapter=new BaloonAdapter(this);
         listView.setAdapter(baloonAdapter);
@@ -51,14 +51,6 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
-
-
     }
-    //---------------서버 접속
 
-    //-----------------------------스트림 획득
-
-    //-----------------------------------채팅버튼 눌렀을 시 갱신
-
-    //------------------------------------
 }
