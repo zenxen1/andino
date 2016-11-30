@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.util.Log;
 
 import com.sds.study.andino.activity.ChatActivity;
+import com.sds.study.andino.activity.LoginActivity;
 import com.sds.study.andino.activity.RoomActivity;
 import com.sds.study.andino.model.dto.Speech;
 
@@ -34,8 +35,8 @@ public class ClientThread extends Thread {
     private ClientThread() {
         TAG=this.getClass().getName();
         try {
-            buffr=new BufferedReader(new InputStreamReader(RoomActivity.socket.getInputStream(),"utf-8"));
-            buffw=new BufferedWriter(new OutputStreamWriter(RoomActivity.socket.getOutputStream(),"utf-8"));
+            buffr=new BufferedReader(new InputStreamReader(LoginActivity.socket.getInputStream(),"utf-8"));
+            buffw=new BufferedWriter(new OutputStreamWriter(LoginActivity.socket.getOutputStream(),"utf-8"));
         } catch (IOException e) {
             e.printStackTrace();
         }
