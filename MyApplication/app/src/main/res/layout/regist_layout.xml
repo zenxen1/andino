@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/loginback"
+    android:gravity="center">
+
+
+    <TextView
+
+        android:textColor="#f4f0f0"
+        android:textSize="30dp"
+        android:gravity="center_horizontal"
+        android:text="Andino TAlk TAlk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+
+        android:textColor="#f4f0f0"
+        android:textSize="30dp"
+        android:gravity="center_horizontal"
+        android:text="회원가입"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+        android:gravity="center_horizontal">
+
+
+        <EditText
+            android:textColor="#f6f2f2"
+            android:padding="5dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/layout_border"
+            android:hint="이름 입력"
+            android:textColorHint="#f6f5f5"
+            android:layout_width="250dp"
+            android:layout_height="30dp"
+            />
+
+        <EditText
+            android:textColor="#f6f2f2"
+            android:padding="5dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/layout_border"
+            android:hint="아이디 입력"
+            android:textColorHint="#f6f5f5"
+            android:layout_width="250dp"
+            android:layout_height="30dp" />
+
+        <EditText
+            android:textColor="#f6f2f2"
+            android:inputType="numberPassword"
+            android:padding="5dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/layout_border"
+            android:hint="비밀번호 입력(숫자4자리)"
+            android:textColorHint="#f6f5f5"
+            android:layout_width="250dp"
+            android:layout_height="30dp" />
+
+        <EditText
+            android:textColor="#f6f2f2"
+            android:inputType="numberPassword"
+            android:padding="5dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/layout_border"
+            android:hint="비밀번호 확인"
+            android:textColorHint="#f6f5f5"
+            android:layout_width="250dp"
+            android:layout_height="30dp" />
+
+        <EditText
+            android:textColor="#f6f2f2"
+            android:padding="5dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/layout_border"
+            android:hint="이메일 입력"
+            android:textColorHint="#f6f5f5"
+            android:layout_width="250dp"
+            android:layout_height="30dp" />
+
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/regist_to_login"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center_horizontal"
+        android:background="#FFDD00"
+        android:text="회원가입 하기"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:textSize="12dp"
+            android:text="비밀번호 찾기"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:layout_marginLeft="30dp"
+            android:text="로그인"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</LinearLayout>

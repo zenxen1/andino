@@ -73,6 +73,7 @@ public class ClientThread extends Thread {
     }
     public void jsonAnalyzer(String data){
         try {
+            Log.d(TAG,data);
             JSONObject jsonObject=new JSONObject(data);
             String title=(String)jsonObject.getString("title");
             if(title.equals("chat")){
