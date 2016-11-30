@@ -26,6 +26,10 @@ public class RoundProfile extends ImageView {
     public RoundProfile(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 10aebbb4f6910ff4c6a9854e245359a045bb116c
     @Override
     protected void onDraw(Canvas canvas) {
         Path clipPath = new Path();

@@ -25,25 +25,30 @@ import java.net.Socket;
  */
 
 public class ClientThread extends Thread {
-    RoomActivity roomActivity;
     BufferedReader buffr;
     BufferedWriter buffw;
-    Socket socket;
     boolean flag=true;
     PackageInfo info;
     String TAG;
-    public ClientThread(RoomActivity roomActivity) {
-        this.roomActivity=roomActivity;
-        this.socket=roomActivity.socket;
+    private static ClientThread instance;
+    private ClientThread() {
         TAG=this.getClass().getName();
         try {
-            buffr=new BufferedReader(new InputStreamReader(socket.getInputStream(),"utf-8"));
-            buffw=new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(),"utf-8"));
+            buffr=new BufferedReader(new InputStreamReader(RoomActivity.socket.getInputStream(),"utf-8"));
+            buffw=new BufferedWriter(new OutputStreamWriter(RoomActivity.socket.getOutputStream(),"utf-8"));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
+    public static ClientThread getInstance(){
+        if(instance==null){
+            instance=new ClientThread();
+        }
+
+        return instance;
+    }
+
     public void listen(){
         try {
             String data=buffr.readLine();
@@ -68,14 +73,16 @@ public class ClientThread extends Thread {
     }
     public void jsonAnalyzer(String data){
         try {
+            Log.d(TAG,data);
             JSONObject jsonObject=new JSONObject(data);
             String title=(String)jsonObject.getString("title");
             if(title.equals("chat")){
                 Speech speech=new Speech();
                 speech.setId(jsonObject.getString("id"));
                 speech.setContent(jsonObject.getString("content"));
-                speech.setTime("12:00");
-                ChatActivity.baloonAdapter.list.add(speech);
+                speech.setTime("11:00");
+                ChatActivity.chatActivity.baloonAdapter.list.add(speech);
+                ChatActivity.chatActivity.handler.sendEmptyMessage(0);
             }
         } catch (Exception e) {
             e.printStackTrace();

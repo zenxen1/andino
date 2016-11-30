@@ -1,6 +1,6 @@
 package com.sds.server.dto;
 
-public class room {
+public class Room {
 	private int room_no;
 	private String r_registtime;
 	private int r_captain;

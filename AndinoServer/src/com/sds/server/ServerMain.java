@@ -5,6 +5,9 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Vector;
 
@@ -30,6 +33,7 @@ public class ServerMain extends JFrame implements ActionListener{
 	AcceptThread acceptThread;
 	HashMap<Integer, Vector> roomList=new HashMap<Integer,Vector>();
 	Vector<ServerThread> threadList=new Vector<ServerThread>();
+	
 	public ServerMain() {
 		p_north=new JPanel();
 		p_north.setLayout(new FlowLayout());
@@ -45,7 +49,7 @@ public class ServerMain extends JFrame implements ActionListener{
 		setSize(600, 900);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
-		
+
 	}
 	
 	public void actionPerformed(ActionEvent e) {

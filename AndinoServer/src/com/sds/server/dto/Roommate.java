@@ -1,6 +1,6 @@
 package com.sds.server.dto;
 
-public class roommate {
+public class Roommate {
 	
 	private int roommate_no;
 	private int rm_roomno;
