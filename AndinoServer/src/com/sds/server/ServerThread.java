@@ -67,9 +67,7 @@ public class ServerThread extends Thread {
 		try {
 			data = buffr.readLine();
 			jsonAnalyzer(data);
-			for(int i=0;i<serverMain.threadList.size();i++){
-				serverMain.threadList.get(i).sendMsg(data);
-			}
+			
 		} catch (IOException e) {
 			flag=false;
 			serverMain.threadList.remove(serverMain.threadList.indexOf(this));

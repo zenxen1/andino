@@ -30,13 +30,12 @@ public class RoomActivity extends AppCompatActivity {
     String ip = "192.168.0.38";//필요한 아이피로 바꿀것
     int port = 9090;
     public static RoomActivity roomActivity;
-
+    public static ChatActivity chatActivity;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.roomActivity = this;
         connect();
         setContentView(R.layout.roommain);
-
         /*fragment 정의*/
         roomPage = (ViewPager) findViewById(R.id.roomPage);
         roomPagerAdapter = new RoomPagerAdapter(getSupportFragmentManager());
@@ -46,8 +45,6 @@ public class RoomActivity extends AppCompatActivity {
         room_toolbar = (Toolbar) findViewById(R.id.room_toolbar);
         room_toolbar.setTitle("채팅");
         setSupportActionBar(room_toolbar);
-
-
     }
 
     /*메뉴부착*/
@@ -77,11 +74,9 @@ public class RoomActivity extends AppCompatActivity {
             public void run() {
                 try {
                     socket = new Socket(ip, port);//서버 연결
-
                     clientThread = new ClientThread(roomActivity);
                     clientThread.start();
                 } catch (IOException e) {
-
                     e.printStackTrace();
                 }
             }

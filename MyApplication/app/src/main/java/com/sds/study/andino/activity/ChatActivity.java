@@ -2,6 +2,8 @@ package com.sds.study.andino.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -20,12 +22,12 @@ import com.sds.study.andino.R;
 
 public class ChatActivity extends AppCompatActivity {
     ListView listView;
-    public static BaloonAdapter baloonAdapter;
+    public BaloonAdapter baloonAdapter;
     ImageView js_to_invite, js_chat_back;
     EditText txt_send;
     Button bt_send;
-    public static ChatActivity chatActivity;
     String TAG;
+    public Handler handler;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,17 +35,22 @@ public class ChatActivity extends AppCompatActivity {
         //room_id,자신의 member_id,같이 채팅하는 사람들 id를 받아와서 db에서 이미지 정보등을 받아온다.
 
         //-------------------------------------------------------
-        this.chatActivity=this;
+        RoomActivity.chatActivity=this;
         TAG=getClass().getName();
         setContentView(R.layout.chatactivity_layout);
         listView=(ListView)findViewById(R.id.listView);
         baloonAdapter=new BaloonAdapter(this);
         listView.setAdapter(baloonAdapter);
         init();
+        handler=new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                baloonAdapter.notifyDataSetChanged();
+            }
+        };
     }
     public void btnClick(View view){
         StringBuffer sb=new StringBuffer();
-
         sb.append("{");
         sb.append("\"title\":\"chat\",");
         sb.append("\"id\":1,");
