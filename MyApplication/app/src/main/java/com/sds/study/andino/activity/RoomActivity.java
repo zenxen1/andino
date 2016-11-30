@@ -48,7 +48,7 @@ public class RoomActivity extends AppCompatActivity {
         room_toolbar.setTitle("채팅");
         setSupportActionBar(room_toolbar);
 
-       // friendList();
+       friendList();
 
     }
 
@@ -56,7 +56,7 @@ public class RoomActivity extends AppCompatActivity {
         StringBuffer sb=new StringBuffer();
 
         sb.append("{");
-        sb.append("\"title\":\"friendList\",");
+        sb.append("\"title\":\"roomList\",");
         sb.append("\"content\":\"1\"");
         sb.append("}");
         if(clientThread!=null) {

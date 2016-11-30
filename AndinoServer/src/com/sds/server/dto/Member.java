@@ -1,6 +1,6 @@
 package com.sds.server.dto;
 
-public class member {
+public class Member {
 	
 	private int member_id;
 	private String m_id;

@@ -1,6 +1,6 @@
 package com.sds.server.dto;
 
-public class friend {
+public class Friend {
 	
 	private int friend_no;
 	private int f_me;
