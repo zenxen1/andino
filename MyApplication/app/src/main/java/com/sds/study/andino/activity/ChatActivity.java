@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.sds.study.andino.adapter.BaloonAdapter;
 import com.sds.study.andino.R;
+import com.sds.study.andino.network.ClientThread;
 
 /**
  * Created by efro2 on 2016-11-25.
@@ -28,6 +29,7 @@ public class ChatActivity extends AppCompatActivity {
     Button bt_send;
     String TAG;
     public Handler handler;
+    public static ChatActivity chatActivity;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +37,7 @@ public class ChatActivity extends AppCompatActivity {
         //room_id,자신의 member_id,같이 채팅하는 사람들 id를 받아와서 db에서 이미지 정보등을 받아온다.
 
         //-------------------------------------------------------
-        RoomActivity.chatActivity=this;
+        chatActivity=this;
         TAG=getClass().getName();
         setContentView(R.layout.chatactivity_layout);
         listView=(ListView)findViewById(R.id.listView);
@@ -51,12 +53,13 @@ public class ChatActivity extends AppCompatActivity {
     }
     public void btnClick(View view){
         StringBuffer sb=new StringBuffer();
+
         sb.append("{");
         sb.append("\"title\":\"chat\",");
         sb.append("\"id\":1,");
         sb.append("\"content\":\""+txt_send.getText().toString()+"\"");
         sb.append("}");
-        RoomActivity.clientThread.sendMsg(sb.toString());
+        ClientThread.getInstance().sendMsg(sb.toString());
     }
     public void init(){
         js_to_invite=(ImageView)findViewById(R.id.js_to_invite);

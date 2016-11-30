@@ -25,12 +25,12 @@ public class RoomActivity extends AppCompatActivity {
     ViewPager roomPage;
     RoomPagerAdapter roomPagerAdapter;
     ImageView chatting;
-    public Socket socket;
+    public static Socket socket;
     public static ClientThread clientThread;//서버 요청시  사용 할것
     String ip = "192.168.0.38";//필요한 아이피로 바꿀것
     int port = 9090;
     public static RoomActivity roomActivity;
-    public static ChatActivity chatActivity;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.roomActivity = this;
@@ -67,20 +67,23 @@ public class RoomActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
     //서버와 연결
-    public void connect(){
-        Thread thread = new Thread() {
-            @Override
-            public void run() {
-                try {
-                    socket = new Socket(ip, port);//서버 연결
-                    clientThread = new ClientThread(roomActivity);
-                    clientThread.start();
-                } catch (IOException e) {
-                    e.printStackTrace();
+    public void connect() {
+        if (socket==null) {
+            Thread thread = new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        socket = new Socket(ip, port);//서버 연결
+                        clientThread = ClientThread.getInstance();
+                        clientThread.start();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
-            }
-        };
-        thread.start();
+            };
+            thread.start();
+        }
     }
 }
