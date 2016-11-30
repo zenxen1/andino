@@ -1,6 +1,17 @@
 package com.sds.study.andino.network;
 
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.util.Log;
+
+import com.sds.study.andino.activity.ChatActivity;
 import com.sds.study.andino.activity.RoomActivity;
+import com.sds.study.andino.model.dto.Speech;
+
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -19,19 +30,24 @@ public class ClientThread extends Thread {
     BufferedWriter buffw;
     Socket socket;
     boolean flag=true;
+    PackageInfo info;
+    String TAG;
     public ClientThread(RoomActivity roomActivity) {
         this.roomActivity=roomActivity;
         this.socket=roomActivity.socket;
+        TAG=this.getClass().getName();
         try {
             buffr=new BufferedReader(new InputStreamReader(socket.getInputStream(),"utf-8"));
             buffw=new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(),"utf-8"));
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
     public void listen(){
         try {
             String data=buffr.readLine();
+            jsonAnalyzer(data);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -50,4 +66,22 @@ public class ClientThread extends Thread {
             listen();
         }
     }
+    public void jsonAnalyzer(String data){
+        try {
+            Log.d(TAG,data);
+            JSONObject jsonObject=new JSONObject(data);
+            String title=(String)jsonObject.getString("title");
+            if(title.equals("chat")){
+                Speech speech=new Speech();
+                speech.setId(jsonObject.getString("id"));
+                speech.setContent(jsonObject.getString("content"));
+                speech.setTime("11:00");
+                roomActivity.chatActivity.baloonAdapter.list.add(speech);
+                roomActivity.chatActivity.handler.sendEmptyMessage(0);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

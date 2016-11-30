@@ -34,7 +34,7 @@ public class RoomChatFragment extends Fragment {
         roomChatItemAdapter = new RoomChatItemAdapter(getContext());
         listView.setAdapter(roomChatItemAdapter);
         context = getContext();
-       // RoomChatItem roomChatItem = new RoomChatItem(getContext());
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

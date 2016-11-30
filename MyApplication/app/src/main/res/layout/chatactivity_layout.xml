@@ -52,11 +52,14 @@
         android:layout_weight="1">
 
         <EditText
+            android:id="@+id/txt_send"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="4" />
 
         <Button
+            android:id="@+id/bt_send"
+            android:onClick="btnClick"
             android:text="전송"
             android:layout_width="0dp"
             android:layout_height="match_parent"

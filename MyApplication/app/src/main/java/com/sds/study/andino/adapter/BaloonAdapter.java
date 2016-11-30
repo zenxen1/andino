@@ -17,20 +17,20 @@ import java.util.ArrayList;
  */
 
 public class BaloonAdapter extends BaseAdapter {
-    ArrayList<Speech> list=new ArrayList<Speech>();
+    public ArrayList<Speech> list=new ArrayList<Speech>();
     ChatActivity chatActivity;
     String TAG;
     public BaloonAdapter(ChatActivity chatActivity) {
         this.chatActivity = chatActivity;
         TAG=getClass().getName();
-        Speech speech = new Speech();
+        /*Speech speech = new Speech();
         speech.setId("지석");
         speech.setContent("이젠 파일 직접 올리지 않습니다. \n메일주소 적어주시면 보내드릴게요..\n" +
                 "어떤분이 다른동에 가셔서 자기거인냥");
         speech.setTime("12:42");
         for (int i=0;i<8;i++) {
             list.add(speech);
-        }
+        }*/
     }
 
     @Override
@@ -51,13 +51,9 @@ public class BaloonAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         Speech dto=(Speech) list.get(i);
-        if(0==(i%2.0)){
-            Log.d(TAG,"1");
+
             view=new ItemRightBaloon(chatActivity,dto);
-        }else {
-            Log.d(TAG,"2");
-            view=new ItemLeftBaloon(chatActivity,dto);
-        }
+
         return view;
     }
 }
