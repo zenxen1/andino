@@ -27,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     String ip = "192.168.0.38";//필요한 아이피로 바꿀것
     int port = 9090;
     public static LoginActivity loginActivity;
+    
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
