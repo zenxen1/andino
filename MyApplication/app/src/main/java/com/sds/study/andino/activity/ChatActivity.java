@@ -24,7 +24,7 @@ public class ChatActivity extends AppCompatActivity {
     ImageView js_to_invite, js_chat_back;
     EditText txt_send;
     Button bt_send;
-    RoomActivity roomActivity;
+    public static ChatActivity chatActivity;
     String TAG;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,10 +33,11 @@ public class ChatActivity extends AppCompatActivity {
         //room_id,자신의 member_id,같이 채팅하는 사람들 id를 받아와서 db에서 이미지 정보등을 받아온다.
 
         //-------------------------------------------------------
+        this.chatActivity=this;
         TAG=getClass().getName();
         setContentView(R.layout.chatactivity_layout);
         listView=(ListView)findViewById(R.id.listView);
-        BaloonAdapter baloonAdapter=new BaloonAdapter(this);
+        baloonAdapter=new BaloonAdapter(this);
         listView.setAdapter(baloonAdapter);
         init();
     }
@@ -45,6 +46,7 @@ public class ChatActivity extends AppCompatActivity {
 
         sb.append("{");
         sb.append("\"title\":\"chat\",");
+        sb.append("\"id\":1,");
         sb.append("\"content\":\""+txt_send.getText().toString()+"\"");
         sb.append("}");
         RoomActivity.clientThread.sendMsg(sb.toString());
@@ -70,4 +72,5 @@ public class ChatActivity extends AppCompatActivity {
         bt_send=(Button)findViewById(R.id.bt_send);
         txt_send=(EditText)findViewById(R.id.txt_send);
     }
+
 }

@@ -75,7 +75,9 @@ public class ClientThread extends Thread {
                 speech.setId(jsonObject.getString("id"));
                 speech.setContent(jsonObject.getString("content"));
                 speech.setTime("12:00");
-                ChatActivity.baloonAdapter.list.add(speech);
+                
+               /* ChatActivity.baloonAdapter.list.add(speech);
+                ChatActivity.baloonAdapter.notifyDataSetChanged();*/
             }
         } catch (Exception e) {
             e.printStackTrace();

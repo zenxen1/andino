@@ -27,9 +27,9 @@ public class RoomActivity extends AppCompatActivity {
     ImageView chatting;
     public Socket socket;
     public static ClientThread clientThread;//서버 요청시  사용 할것
-    String ip = "192.168.123.157";//필요한 아이피로 바꿀것
+    String ip = "192.168.0.38";//필요한 아이피로 바꿀것
     int port = 9090;
-    RoomActivity roomActivity;
+    public static RoomActivity roomActivity;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
