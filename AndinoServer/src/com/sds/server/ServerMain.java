@@ -34,12 +34,6 @@ public class ServerMain extends JFrame implements ActionListener{
 	HashMap<Integer, Vector> roomList=new HashMap<Integer,Vector>();
 	Vector<ServerThread> threadList=new Vector<ServerThread>();
 	
-	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String user = "andino";
-	String password = "andino";
-	Connection con;
-	
 	public ServerMain() {
 		p_north=new JPanel();
 		p_north.setLayout(new FlowLayout());
@@ -56,20 +50,6 @@ public class ServerMain extends JFrame implements ActionListener{
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
 		
-		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, user, password);
-			if (con != null) {
-				setTitle("오라클 접속 성공");
-			}
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
 		
 		
 	}

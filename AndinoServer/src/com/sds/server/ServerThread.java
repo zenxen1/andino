@@ -11,10 +11,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
+import com.sds.server.dao.RoomDAO;
+import com.sds.server.dto.Room;
 
 public class ServerThread extends Thread {
 	Socket socket;
@@ -24,14 +28,10 @@ public class ServerThread extends Thread {
 	boolean flag=true;
 	StringBuffer sb=new StringBuffer();
 	
-	Connection con;
-	PreparedStatement pstmt;
-	ResultSet rs;
 	
 	public ServerThread(Socket socket,ServerMain serverMain) {
 		this.socket = socket;
 		this.serverMain=serverMain;
-		this.con = serverMain.con; //커넥션 얻어오기
 		
 		try {
 			buffr = new BufferedReader(new InputStreamReader(socket.getInputStream(), "utf-8"));
@@ -51,7 +51,7 @@ public class ServerThread extends Thread {
 			JSONObject jsonObject=(JSONObject) jsonParser.parse(data);
 			String title=(String)jsonObject.get("title");
 			switch(title){
-			case "chat":
+			case "chat2":
 				String content=(String)jsonObject.get("content");
 				sb.append("{");
 				sb.append("\"title\":\"chat\",");
@@ -65,24 +65,33 @@ public class ServerThread extends Thread {
 				break;
 			case "login":
 				break;
-			case "friendList":
-				
-				String sql = "select * from room";
-				pstmt = con.prepareStatement(sql);
-				rs = pstmt.executeQuery();
-				
-				rs.next();
-				
+			case "chat":
+				RoomDAO dao = new RoomDAO();
+				List<Room> list = dao.selectAll();
+				sb.append("{");
+				sb.append("\"title\":\"roomList\",");
+				sb.append("\"roomList\":");
+				sb.append("[");
+				for(int i=0;i<list.size();i++){
+					Room dto = list.get(i);
+					sb.append("{");
+					sb.append("\"content\":\""+dto.getR_title()+"\"");
+					if(i<list.size()-1){
+						sb.append("},");
+					}else{
+						sb.append("}");
+					}
+				}
+				sb.append("]");
+				sb.append("}");
+				System.out.println(list.size()+","+sb.toString());
 				break;
 			
 			}
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} 
 	}
 	
 	public void listen() {
