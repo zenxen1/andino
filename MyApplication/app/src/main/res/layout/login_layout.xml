@@ -25,6 +25,7 @@
         android:gravity="center_horizontal">
 
         <EditText
+            android:id="@+id/idInput"
             android:textColor="#f6f2f2"
             android:padding="5dp"
             android:layout_margin="10dp"
@@ -36,6 +37,7 @@
             />
 
         <EditText
+            android:id="@+id/passwordInput"
             android:textColor="#f6f2f2"
             android:inputType="numberPassword"
             android:padding="5dp"
