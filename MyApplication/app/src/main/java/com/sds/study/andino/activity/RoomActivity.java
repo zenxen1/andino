@@ -50,7 +50,7 @@ public class RoomActivity extends AppCompatActivity {
         room_toolbar.setTitle("채팅");
         setSupportActionBar(room_toolbar);
 
-       // friendList();
+       friendList();
 
     }
 

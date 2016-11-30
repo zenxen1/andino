@@ -7,6 +7,10 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.Socket;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -19,9 +23,16 @@ public class ServerThread extends Thread {
 	ServerMain serverMain;
 	boolean flag=true;
 	StringBuffer sb=new StringBuffer();
+	
+	Connection con;
+	PreparedStatement pstmt;
+	ResultSet rs;
+	
 	public ServerThread(Socket socket,ServerMain serverMain) {
 		this.socket = socket;
 		this.serverMain=serverMain;
+		this.con = serverMain.con; //커넥션 얻어오기
+		
 		try {
 			buffr = new BufferedReader(new InputStreamReader(socket.getInputStream(), "utf-8"));
 			buffw = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), "utf-8"));
@@ -54,9 +65,21 @@ public class ServerThread extends Thread {
 				break;
 			case "login":
 				break;
+			case "friendList":
+				
+				String sql = "select * from room";
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				
+				rs.next();
+				
+				break;
 			
 			}
 		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
