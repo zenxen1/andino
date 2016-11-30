@@ -68,14 +68,15 @@ public class ClientThread extends Thread {
     }
     public void jsonAnalyzer(String data){
         try {
+            Log.d(TAG,data);
             JSONObject jsonObject=new JSONObject(data);
             String title=(String)jsonObject.getString("title");
             if(title.equals("chat")){
                 Speech speech=new Speech();
-                speech.setId(jsonObject.getString("id"));
+                /*speech.setId(jsonObject.getString("id"));
                 speech.setContent(jsonObject.getString("content"));
                 speech.setTime("12:00");
-                ChatActivity.baloonAdapter.list.add(speech);
+                ChatActivity.baloonAdapter.list.add(speech);*/
             }
         } catch (Exception e) {
             e.printStackTrace();
