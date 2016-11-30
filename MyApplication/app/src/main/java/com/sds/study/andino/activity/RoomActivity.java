@@ -30,8 +30,9 @@ public class RoomActivity extends AppCompatActivity {
     public static ClientThread clientThread;//서버 요청시  사용 할것
     String ip = "192.168.0.28";//필요한 아이피로 바꿀것
     int port = 9090;
-    RoomActivity roomActivity;
     String TAG;
+    public static RoomActivity roomActivity;
+    public static ChatActivity chatActivity;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +40,6 @@ public class RoomActivity extends AppCompatActivity {
         TAG = this.getClass().getName();
         connect();
         setContentView(R.layout.roommain);
-
         /*fragment 정의*/
         roomPage = (ViewPager) findViewById(R.id.roomPage);
         roomPagerAdapter = new RoomPagerAdapter(getSupportFragmentManager());
@@ -94,11 +94,9 @@ public class RoomActivity extends AppCompatActivity {
             public void run() {
                 try {
                     socket = new Socket(ip, port);//서버 연결
-
                     clientThread = new ClientThread(roomActivity);
                     clientThread.start();
                 } catch (IOException e) {
-
                     e.printStackTrace();
                 }
             }

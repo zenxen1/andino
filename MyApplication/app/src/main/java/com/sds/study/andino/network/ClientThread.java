@@ -73,10 +73,11 @@ public class ClientThread extends Thread {
             String title=(String)jsonObject.getString("title");
             if(title.equals("chat")){
                 Speech speech=new Speech();
-                /*speech.setId(jsonObject.getString("id"));
+                speech.setId(jsonObject.getString("id"));
                 speech.setContent(jsonObject.getString("content"));
-                speech.setTime("12:00");
-                ChatActivity.baloonAdapter.list.add(speech);*/
+                speech.setTime("11:00");
+                roomActivity.chatActivity.baloonAdapter.list.add(speech);
+                roomActivity.chatActivity.handler.sendEmptyMessage(0);
             }
         } catch (Exception e) {
             e.printStackTrace();
