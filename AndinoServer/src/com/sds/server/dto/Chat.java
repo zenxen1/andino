@@ -1,6 +1,6 @@
 package com.sds.server.dto;
 
-public class chat {
+public class Chat {
 	
 	private int chat_no;
 	private int c_roomno;
