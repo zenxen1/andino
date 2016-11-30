@@ -49,9 +49,6 @@ public class ServerMain extends JFrame implements ActionListener{
 		setSize(600, 900);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
-		
-		
-		
 	}
 	
 	public void actionPerformed(ActionEvent e) {
