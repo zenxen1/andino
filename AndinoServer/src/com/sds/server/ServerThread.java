@@ -51,7 +51,7 @@ public class ServerThread extends Thread {
 			JSONObject jsonObject=(JSONObject) jsonParser.parse(data);
 			String title=(String)jsonObject.get("title");
 			switch(title){
-			case "chat2":
+			case "chat":
 				String content=(String)jsonObject.get("content");
 				sb.append("{");
 				sb.append("\"title\":\"chat\",");
@@ -65,7 +65,7 @@ public class ServerThread extends Thread {
 				break;
 			case "login":
 				break;
-			case "chat":
+			case "roomList":
 				RoomDAO dao = new RoomDAO();
 				List<Room> list = dao.selectAll();
 				sb.append("{");
