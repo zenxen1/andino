@@ -83,4 +83,6 @@ public class ChatActivity extends AppCompatActivity {
         txt_send=(EditText)findViewById(R.id.txt_send);
     }
 
+
+
 }
