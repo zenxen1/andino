@@ -7,22 +7,21 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.Socket;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-<<<<<<< HEAD
+import com.sds.server.common.ConnectionManager;
+import com.sds.server.dao.ChatDAO;
 import com.sds.server.dao.NickNameDAO;
 import com.sds.server.dao.RoomDAO;
-import com.sds.server.dto.NickName;
-=======
-import com.sds.server.dao.ChatDAO;
-import com.sds.server.common.ConnectionManager;
-import com.sds.server.dao.RoomDAO;
 import com.sds.server.dto.Chat;
->>>>>>> e1ce8367d692af69ddc50130200292b9d6c6ec43
+import com.sds.server.dto.NickName;
 import com.sds.server.dto.Room;
 
 public class ServerThread extends Thread {
@@ -30,21 +29,19 @@ public class ServerThread extends Thread {
 	BufferedReader buffr;
 	BufferedWriter buffw;
 	ServerMain serverMain;
-<<<<<<< HEAD
+	boolean switcher = true;
+	Connection con;
+	PreparedStatement pstmt;
+
 	boolean flag = true;
 	StringBuffer sb = new StringBuffer();
 
 	public ServerThread(Socket socket, ServerMain serverMain) {
-=======
-	boolean flag=true;
-	StringBuffer sb=new StringBuffer();
+		
+		StringBuffer sb = new StringBuffer();
 
-	boolean switcher=true;
-	Connection con;
-	PreparedStatement pstmt;
-	
-	public ServerThread(Socket socket,ServerMain serverMain) {
->>>>>>> e1ce8367d692af69ddc50130200292b9d6c6ec43
+		
+
 		this.socket = socket;
 		this.serverMain = serverMain;
 
@@ -67,32 +64,26 @@ public class ServerThread extends Thread {
 			String title = (String) jsonObject.get("title");
 			switch (title) {
 			case "chat":
-<<<<<<< HEAD
+
 				String content = (String) jsonObject.get("content");
-				sb.append("{");
-				sb.append("\"title\":\"chat\",");
-				sb.append("\"id\":3,");
-				sb.append("\"content\":\"" + jsonObject.get("content") + "\"");
-=======
-				String content=(String)jsonObject.get("content");
-				String id=(String)jsonObject.get("id");
-				ChatDAO chatDAO=new ChatDAO();
-				Chat chat=new Chat();
+				String id = (String) jsonObject.get("id");
+				ChatDAO chatDAO = new ChatDAO();
+				Chat chat = new Chat();
 				chat.setC_msg(content);
 				chat.setC_roomno(1);
 				chat.setC_me(Integer.parseInt(id));
-				int answer=chatDAO.insert(chat);
+				int answer = chatDAO.insert(chat);
 				sb.append("{");
 				sb.append("\"title\":\"chat\",");
-				if(switcher){
-					
+				if (switcher) {
+
 					sb.append("\"id\":\"0\",");
-				}else{
+				} else {
 					sb.append("\"id\":\"1\",");
 				}
-				switcher=!switcher;
-				sb.append("\"content\":\""+jsonObject.get("content")+"\"");
->>>>>>> e1ce8367d692af69ddc50130200292b9d6c6ec43
+				switcher = !switcher;
+				sb.append("\"content\":\"" + jsonObject.get("content") + "\"");
+
 				sb.append("}");
 				serverMain.area.append((String) jsonObject.get("content") + "\n");
 				for (int i = 0; i < serverMain.threadList.size(); i++) {
@@ -105,24 +96,24 @@ public class ServerThread extends Thread {
 				String sql = "insert into member(member_id,id,pwd,name,nickname)";
 				sql = sql + " values(seq_member.nextval,?,?,?,?)";
 				System.out.println(sql);
-				
+
 				try {
-					pstmt=con.prepareStatement(sql);
-					pstmt.setString(1, (String)jsonObject.get("id"));
-					pstmt.setString(2, (String)jsonObject.get("password"));
-					pstmt.setString(3, (String)jsonObject.get("name"));
-					pstmt.setString(4, (String)jsonObject.get("nickname"));
-					
+					pstmt = con.prepareStatement(sql);
+					pstmt.setString(1, (String) jsonObject.get("id"));
+					pstmt.setString(2, (String) jsonObject.get("password"));
+					pstmt.setString(3, (String) jsonObject.get("name"));
+					pstmt.setString(4, (String) jsonObject.get("nickname"));
+
 					int result = pstmt.executeUpdate();
-					serverMain.area.append("\n"+sb);
+					serverMain.area.append("\n" + sb);
 					sb.delete(0, sb.length());
-					
-					if(result!=-1){
-						System.out.println("등록 실패");	
-					}else{
+
+					if (result != -1) {
+						System.out.println("등록 실패");
+					} else {
 						System.out.println("등록 성공");
 					}
-					
+
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -153,7 +144,8 @@ public class ServerThread extends Thread {
 			case "nickname":
 				String nickname = (String) jsonObject.get("nickname");
 				NickNameDAO nickdao = new NickNameDAO();
-				List<NickName> nicklist = nickdao.selectAll();
+				NickName nick=new NickName();
+				int nicklist = nickdao.updateselect(nick);
 				sb.append("{");
 				sb.append("\"title\":\"nickname\",");
 				sb.append("\"nickname\":\"" + jsonObject.get("nickname") + "\"");

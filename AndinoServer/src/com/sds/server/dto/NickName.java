@@ -1,17 +1,17 @@
 package com.sds.server.dto;
 
 public class NickName {
-	private int member_id;
+	private int member_sequence;
 	private String m_id;
 	private String m_name;
 	private String m_nickname;
 
-	public int getMember_id() {
-		return member_id;
+	public int getMember_sequence() {
+		return member_sequence;
 	}
 
-	public void setMember_id(int member_id) {
-		this.member_id = member_id;
+	public void setMember_sequence(int member_sequence) {
+		this.member_sequence = member_sequence;
 	}
 
 	public String getM_id() {

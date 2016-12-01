@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.sds.server.common.ConnectionManager;
+import com.sds.server.dto.Chat;
 import com.sds.server.dto.NickName;
 
 public class NickNameDAO {
@@ -19,7 +20,26 @@ public class NickNameDAO {
 
 	}
 
-	public List selectAll() {
+	
+	public int update(NickName nickname){
+		con=ConnectionManager.getInstance().getConnection();
+		String sql="update member set m_nickname=현재 바꿀것  where m_id = 현재의 id와 같은것";
+		int result=0;
+		try {
+			PreparedStatement pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, nickname.getM_nickname());
+
+			result=pstmt.executeUpdate();
+			System.out.println("update완료");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	
+	public List selectOne() {
 
 		String sql = "select*from member";
 		ArrayList<NickName> list = new ArrayList<NickName>();
@@ -29,14 +49,14 @@ public class NickNameDAO {
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 
-			while (rs.next()) {
+			if(rs.next()){
 				NickName dto = new NickName();
-				dto.setMember_id(rs.getInt("member_id"));
+				dto.setMember_sequence(rs.getInt("member_id"));
 				dto.setM_id(rs.getString("m_id"));
 				dto.setM_name(rs.getString("m_name"));
 				dto.setM_nickname(rs.getString("m_nickname"));
-				list.add(dto);
 			}
+			
 		} catch (SQLException e) {
 			System.out.println("OK");
 			e.printStackTrace();
@@ -45,6 +65,39 @@ public class NickNameDAO {
 		}
 		return list;
 
+	}
+	public int updateselect(NickName nickname){
+		con=ConnectionManager.getInstance().getConnection();
+		String sql="update member set m_nickname=?  where m_id =?";
+		int result=0;
+		try {
+			con.setAutoCommit(false);
+			PreparedStatement pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, nickname.getM_nickname());
+
+			result=pstmt.executeUpdate();
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			System.out.println("update완료");
+			sql = "select*from member";
+			if(rs.next()){
+				NickName dto = new NickName();
+				
+				dto.setM_nickname(rs.getString("m_nickname"));
+			}
+			con.commit();
+			con.setAutoCommit(true);
+		} catch (SQLException e) {
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 }

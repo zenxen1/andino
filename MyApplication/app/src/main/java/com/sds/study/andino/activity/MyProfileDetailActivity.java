@@ -42,7 +42,8 @@ public class MyProfileDetailActivity extends AppCompatActivity {
                 StringBuffer sb = new StringBuffer();
                 sb.append("{");
                 sb.append("\"title\":\"nickname\",");
-                sb.append("\"nickname\":\"" + txt_nickname.getText().toString() + "\"");
+                sb.append("\"nickname\":\"" + txt_nickname.getText().toString() + "\",");
+                sb.append("\"member_id \":\"" + "1" + "\"");
                 sb.append("}");
                 ClientThread.getInstance().sendMsg(sb.toString());
             }
