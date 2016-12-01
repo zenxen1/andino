@@ -39,7 +39,7 @@ public class ServerMain extends JFrame implements ActionListener{
 		p_north.setLayout(new FlowLayout());
 		area=new JTextArea();
 		tf_port=new JTextField(Integer.toString(port));
-		bt_run=new JButton("°¡µ¿");
+		bt_run=new JButton("ï¿½ï¿½ï¿½ï¿½");
 		scroll=new JScrollPane(area);
 		p_north.add(tf_port);
 		p_north.add(bt_run);

@@ -24,10 +24,15 @@ public class LoginActivity extends AppCompatActivity {
     EditText idInput, passInput;
     public static Socket socket;
     public static ClientThread clientThread;//서버 요청시  사용 할것
+<<<<<<< HEAD
     String ip = "192.168.0.16";//필요한 아이피로 바꿀것
     int port = 9090;
+=======
+    String ip = "192.168.0.39";//필요한 아이피로 바꿀것
+    int port =9090;
+>>>>>>> e1ce8367d692af69ddc50130200292b9d6c6ec43
     public static LoginActivity loginActivity;
-    
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
