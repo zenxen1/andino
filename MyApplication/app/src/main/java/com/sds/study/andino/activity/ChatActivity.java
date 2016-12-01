@@ -56,7 +56,7 @@ public class ChatActivity extends AppCompatActivity {
 
         sb.append("{");
         sb.append("\"title\":\"chat\",");
-        sb.append("\"id\":1,");
+        sb.append("\"id\":\"1\",");
         sb.append("\"content\":\""+txt_send.getText().toString()+"\"");
         sb.append("}");
         ClientThread.getInstance().sendMsg(sb.toString());

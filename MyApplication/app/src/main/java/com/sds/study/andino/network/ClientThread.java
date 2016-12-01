@@ -46,7 +46,6 @@ public class ClientThread extends Thread {
         if(instance==null){
             instance=new ClientThread();
         }
-
         return instance;
     }
 
@@ -55,6 +54,8 @@ public class ClientThread extends Thread {
             String data=buffr.readLine();
             jsonAnalyzer(data);
         } catch (IOException e) {
+            freeConnection();
+            flag=!flag;
             e.printStackTrace();
         }
     }
@@ -89,5 +90,30 @@ public class ClientThread extends Thread {
             e.printStackTrace();
         }
     }
-
+    public void freeConnection(){
+        if(buffr!=null){
+            try {
+                buffr.close();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        }
+        buffr=null;
+        if(buffw!=null){
+            try {
+                buffw.close();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        }
+        buffw=null;
+        if(LoginActivity.socket!=null) {
+            try {
+                LoginActivity.socket.close();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        }
+        LoginActivity.socket=null;
+    }
 }

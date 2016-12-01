@@ -33,7 +33,6 @@ public class RoomDAO {
 				dto.setR_registtime(rs.getString("r_registtime"));
 				dto.setR_title(rs.getString("r_title"));
 				dto.setRoom_no(rs.getInt("room_no"));
-				
 				list.add(dto);
 			}
 		} catch (SQLException e) {

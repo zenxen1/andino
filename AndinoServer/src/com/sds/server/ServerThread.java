@@ -17,7 +17,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import com.sds.server.dao.ChatDAO;
 import com.sds.server.dao.RoomDAO;
+import com.sds.server.dto.Chat;
 import com.sds.server.dto.Room;
 
 public class ServerThread extends Thread {
@@ -27,7 +29,7 @@ public class ServerThread extends Thread {
 	ServerMain serverMain;
 	boolean flag=true;
 	StringBuffer sb=new StringBuffer();
-	
+	boolean switcher=true;
 	
 	public ServerThread(Socket socket,ServerMain serverMain) {
 		this.socket = socket;
@@ -53,9 +55,22 @@ public class ServerThread extends Thread {
 			switch(title){
 			case "chat":
 				String content=(String)jsonObject.get("content");
+				String id=(String)jsonObject.get("id");
+				ChatDAO chatDAO=new ChatDAO();
+				Chat chat=new Chat();
+				chat.setC_msg(content);
+				chat.setC_roomno(1);
+				chat.setC_me(Integer.parseInt(id));
+				int result=chatDAO.insert(chat);
 				sb.append("{");
 				sb.append("\"title\":\"chat\",");
-				sb.append("\"id\":3,");
+				if(switcher){
+					
+					sb.append("\"id\":\"0\",");
+				}else{
+					sb.append("\"id\":\"1\",");
+				}
+				switcher=!switcher;
 				sb.append("\"content\":\""+jsonObject.get("content")+"\"");
 				sb.append("}");
 				serverMain.area.append((String) jsonObject.get("content")+"\n");
