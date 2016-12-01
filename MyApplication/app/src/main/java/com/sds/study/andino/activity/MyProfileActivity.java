@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.sds.study.andino.R;
 import com.sds.study.andino.RoundProfile;
@@ -24,12 +26,14 @@ public class MyProfileActivity extends AppCompatActivity {
     RoundProfile profile_pic;
     ImageView imgback;
     ImageButton bt_setting;
+    TextView profile_name;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_profile);
 
+        TextView profile_name = (TextView) findViewById(R.id.profile_name);
         profile_pic = (RoundProfile) findViewById(R.id.profile_pic);
         ImageView imgback = (ImageView) findViewById(R.id.imgback);
         imgback.setScaleType(ImageView.ScaleType.FIT_XY);
@@ -41,14 +45,14 @@ public class MyProfileActivity extends AppCompatActivity {
         profile_pic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MyProfileActivity.this,ProfileClick_detailActivity.class);
+                Intent intent = new Intent(MyProfileActivity.this, ProfileClick_detailActivity.class);
                 startActivity(intent);
             }
         });
         bt_setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MyProfileActivity.this,MyProfileDetailActivity.class);
+                Intent intent = new Intent(MyProfileActivity.this, MyProfileDetailActivity.class);
                 startActivity(intent);
             }
         });
@@ -56,4 +60,4 @@ public class MyProfileActivity extends AppCompatActivity {
     }
 
 
-    }
+}
