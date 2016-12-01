@@ -18,6 +18,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import com.sds.server.dao.ChatDAO;
+import com.sds.server.common.ConnectionManager;
 import com.sds.server.dao.RoomDAO;
 import com.sds.server.dto.Chat;
 import com.sds.server.dto.Room;
@@ -29,7 +30,10 @@ public class ServerThread extends Thread {
 	ServerMain serverMain;
 	boolean flag=true;
 	StringBuffer sb=new StringBuffer();
+
 	boolean switcher=true;
+	Connection con;
+	PreparedStatement pstmt;
 	
 	public ServerThread(Socket socket,ServerMain serverMain) {
 		this.socket = socket;
@@ -61,7 +65,7 @@ public class ServerThread extends Thread {
 				chat.setC_msg(content);
 				chat.setC_roomno(1);
 				chat.setC_me(Integer.parseInt(id));
-				int result=chatDAO.insert(chat);
+				int answer=chatDAO.insert(chat);
 				sb.append("{");
 				sb.append("\"title\":\"chat\",");
 				if(switcher){
@@ -78,7 +82,34 @@ public class ServerThread extends Thread {
 					((ServerThread)serverMain.threadList.get(i)).sendMsg(sb.toString());
 				}
 				break;
-			case "login":
+			case "regist":
+				con = ConnectionManager.getInstance().getConnection();
+				System.out.println("db생성");
+				String sql = "insert into member(member_id,id,pwd,name,nickname)";
+				sql = sql + " values(seq_member.nextval,?,?,?,?)";
+				System.out.println(sql);
+				
+				try {
+					pstmt=con.prepareStatement(sql);
+					pstmt.setString(1, (String)jsonObject.get("id"));
+					pstmt.setString(2, (String)jsonObject.get("password"));
+					pstmt.setString(3, (String)jsonObject.get("name"));
+					pstmt.setString(4, (String)jsonObject.get("nickname"));
+					
+					int result = pstmt.executeUpdate();
+					serverMain.area.append("\n"+sb);
+					sb.delete(0, sb.length());
+					
+					if(result!=-1){
+						System.out.println("등록 실패");	
+					}else{
+						System.out.println("등록 성공");
+					}
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				break;
 			case "roomList":
 				RoomDAO dao = new RoomDAO();

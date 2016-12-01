@@ -61,7 +61,7 @@ public class ClientThread extends Thread {
     }
     public void sendMsg(String data){
         try {
-            buffw.write(data+"\n");
+            buffw.write(data);
             buffw.flush();
         } catch (IOException e) {
             e.printStackTrace();
