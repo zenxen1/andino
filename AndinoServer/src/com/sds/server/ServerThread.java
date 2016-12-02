@@ -9,7 +9,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.Socket;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -17,10 +16,12 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import com.sds.server.dao.ChatDAO;
 import com.sds.server.common.ConnectionManager;
+import com.sds.server.dao.ChatDAO;
+import com.sds.server.dao.NickNameDAO;
 import com.sds.server.dao.RoomDAO;
 import com.sds.server.dto.Chat;
+import com.sds.server.dto.NickName;
 import com.sds.server.dto.Room;
 
 public class ServerThread extends Thread {
@@ -28,17 +29,22 @@ public class ServerThread extends Thread {
 	BufferedReader buffr;
 	BufferedWriter buffw;
 	ServerMain serverMain;
-	boolean flag=true;
-	StringBuffer sb=new StringBuffer();
-
-	boolean switcher=true;
+	boolean switcher = true;
 	Connection con;
 	PreparedStatement pstmt;
-	
-	public ServerThread(Socket socket,ServerMain serverMain) {
-		this.socket = socket;
-		this.serverMain=serverMain;
+
+	boolean flag = true;
+	StringBuffer sb = new StringBuffer();
+
+	public ServerThread(Socket socket, ServerMain serverMain) {
 		
+		StringBuffer sb = new StringBuffer();
+
+		
+
+		this.socket = socket;
+		this.serverMain = serverMain;
+
 		try {
 			buffr = new BufferedReader(new InputStreamReader(socket.getInputStream(), "utf-8"));
 			buffw = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), "utf-8"));
@@ -49,37 +55,39 @@ public class ServerThread extends Thread {
 		}
 	}
 
-	public void jsonAnalyzer(String data){
+	public void jsonAnalyzer(String data) {
 		System.out.println(data);
-		JSONParser jsonParser=new JSONParser();
+		JSONParser jsonParser = new JSONParser();
 		sb.setLength(0);
 		try {
-			JSONObject jsonObject=(JSONObject) jsonParser.parse(data);
-			String title=(String)jsonObject.get("title");
-			switch(title){
+			JSONObject jsonObject = (JSONObject) jsonParser.parse(data);
+			String title = (String) jsonObject.get("title");
+			switch (title) {
 			case "chat":
-				String content=(String)jsonObject.get("content");
-				String id=(String)jsonObject.get("id");
-				ChatDAO chatDAO=new ChatDAO();
-				Chat chat=new Chat();
+
+				String content = (String) jsonObject.get("content");
+				String id = (String) jsonObject.get("id");
+				ChatDAO chatDAO = new ChatDAO();
+				Chat chat = new Chat();
 				chat.setC_msg(content);
 				chat.setC_roomno(1);
 				chat.setC_me(Integer.parseInt(id));
-				int answer=chatDAO.insert(chat);
+				int answer = chatDAO.insert(chat);
 				sb.append("{");
 				sb.append("\"title\":\"chat\",");
-				if(switcher){
-					
+				if (switcher) {
+
 					sb.append("\"id\":\"0\",");
-				}else{
+				} else {
 					sb.append("\"id\":\"1\",");
 				}
-				switcher=!switcher;
-				sb.append("\"content\":\""+jsonObject.get("content")+"\"");
+				switcher = !switcher;
+				sb.append("\"content\":\"" + jsonObject.get("content") + "\"");
+
 				sb.append("}");
-				serverMain.area.append((String) jsonObject.get("content")+"\n");
-				for(int i=0;i<serverMain.threadList.size();i++){
-					((ServerThread)serverMain.threadList.get(i)).sendMsg(sb.toString());
+				serverMain.area.append((String) jsonObject.get("content") + "\n");
+				for (int i = 0; i < serverMain.threadList.size(); i++) {
+					((ServerThread) serverMain.threadList.get(i)).sendMsg(sb.toString());
 				}
 				break;
 			case "regist":
@@ -88,24 +96,24 @@ public class ServerThread extends Thread {
 				String sql = "insert into member(member_id,id,pwd,name,nickname)";
 				sql = sql + " values(seq_member.nextval,?,?,?,?)";
 				System.out.println(sql);
-				
+
 				try {
-					pstmt=con.prepareStatement(sql);
-					pstmt.setString(1, (String)jsonObject.get("id"));
-					pstmt.setString(2, (String)jsonObject.get("password"));
-					pstmt.setString(3, (String)jsonObject.get("name"));
-					pstmt.setString(4, (String)jsonObject.get("nickname"));
-					
+					pstmt = con.prepareStatement(sql);
+					pstmt.setString(1, (String) jsonObject.get("id"));
+					pstmt.setString(2, (String) jsonObject.get("password"));
+					pstmt.setString(3, (String) jsonObject.get("name"));
+					pstmt.setString(4, (String) jsonObject.get("nickname"));
+
 					int result = pstmt.executeUpdate();
-					serverMain.area.append("\n"+sb);
+					serverMain.area.append("\n" + sb);
 					sb.delete(0, sb.length());
-					
-					if(result!=-1){
-						System.out.println("등록 실패");	
-					}else{
+
+					if (result != -1) {
+						System.out.println("등록 실패");
+					} else {
 						System.out.println("등록 성공");
 					}
-					
+
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -118,36 +126,49 @@ public class ServerThread extends Thread {
 				sb.append("\"title\":\"roomList\",");
 				sb.append("\"roomList\":");
 				sb.append("[");
-				for(int i=0;i<list.size();i++){
+				for (int i = 0; i < list.size(); i++) {
 					Room dto = list.get(i);
 					sb.append("{");
-					sb.append("\"content\":\""+dto.getR_title()+"\"");
-					if(i<list.size()-1){
+					sb.append("\"content\":\"" + dto.getR_title() + "\"");
+					if (i < list.size() - 1) {
 						sb.append("},");
-					}else{
+					} else {
 						sb.append("}");
 					}
 				}
 				sb.append("]");
 				sb.append("}");
-				System.out.println(list.size()+","+sb.toString());
+				System.out.println(list.size() + "," + sb.toString());
 				break;
-			
+
+			case "nickname":
+				String nickname = (String) jsonObject.get("nickname");
+				NickNameDAO nickdao = new NickNameDAO();
+				NickName nick=new NickName();
+				int nicklist = nickdao.updateselect(nick);
+				sb.append("{");
+				sb.append("\"title\":\"nickname\",");
+				sb.append("\"nickname\":\"" + jsonObject.get("nickname") + "\"");
+				sb.append("}");
+				for (int i = 0; i < serverMain.threadList.size(); i++) {
+					((ServerThread) serverMain.threadList.get(i)).sendMsg(sb.toString());
+				}
+				break;
 			}
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
+		}
 	}
-	
+
 	public void listen() {
 		String data = null;
 		try {
 			data = buffr.readLine();
 			jsonAnalyzer(data);
-			
+
 		} catch (IOException e) {
-			flag=false;
+			flag = false;
 			serverMain.threadList.remove(serverMain.threadList.indexOf(this));
 			e.printStackTrace();
 		}
@@ -155,21 +176,19 @@ public class ServerThread extends Thread {
 
 	public void sendMsg(String data) {
 		try {
-			buffw.write(data+"\n");
+			buffw.write(data + "\n");
 			buffw.flush();
 		} catch (IOException e) {
-			flag=false;
+			flag = false;
 			serverMain.threadList.remove(serverMain.threadList.indexOf(this));
 			e.printStackTrace();
 		}
 	}
 
 	public void run() {
-		while(flag){
+		while (flag) {
 			listen();
 		}
 	}
-	
-	
 
 }
