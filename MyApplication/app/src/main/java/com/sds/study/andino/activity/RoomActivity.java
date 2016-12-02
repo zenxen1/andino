@@ -60,6 +60,7 @@ public class RoomActivity extends AppCompatActivity {
         sb.append("\"content\":\"1\"");
         sb.append("}");
         if(LoginActivity.socket!=null) {
+            Log.d(TAG,LoginActivity.socket.toString());
             ClientThread.getInstance().sendMsg(sb.toString());
         }
         Log.d(TAG,sb.toString());
