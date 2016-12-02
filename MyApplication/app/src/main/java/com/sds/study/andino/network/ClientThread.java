@@ -1,17 +1,16 @@
 package com.sds.study.andino.network;
 
-import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.util.Log;
 
 import com.sds.study.andino.activity.ChatActivity;
 import com.sds.study.andino.activity.LoginActivity;
 import com.sds.study.andino.activity.RoomActivity;
+import com.sds.study.andino.activity.mainFragment.RoomChatFragment;
+import com.sds.study.andino.model.dto.RoomChat;
 import com.sds.study.andino.model.dto.Speech;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -19,7 +18,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.net.Socket;
+import java.util.ArrayList;
 
 /**
  * Created by efro2 on 2016-11-29.
@@ -71,6 +70,7 @@ public class ClientThread extends Thread {
         while (flag){
             listen();
         }
+
     }
     public void jsonAnalyzer(String data){
         try {
@@ -84,10 +84,25 @@ public class ClientThread extends Thread {
                 speech.setTime("11:00");
                 ChatActivity.chatActivity.baloonAdapter.list.add(speech);
                 ChatActivity.chatActivity.handler.sendEmptyMessage(0);
+            }else if(title.equals("roomList")){
+                Log.d(TAG,"들어오냐??");
+                JSONArray jsonArray = jsonObject.getJSONArray("roomList");
+                for(int i=0;i<1;i++){
+                    JSONObject obj = jsonArray.getJSONObject(i);
+                    RoomChat roomChat = new RoomChat();
+                    roomChat.setContent(obj.getString("content"));
+                    RoomChatFragment roomChatFragment = (RoomChatFragment) RoomActivity.roomActivity.roomPagerAdapter.getItem(2);
+                    Log.d(TAG,"프레그먼트는 있나?"+roomChatFragment);
+                    Log.d(TAG,"아이템어탭터 있나?"+ roomChatFragment.roomChatItemAdapter);
+                    Log.d(TAG,"리스트 있나?"+roomChatFragment.roomChatItemAdapter.list);
+                    ArrayList list = roomChatFragment.roomChatItemAdapter.list;
+                    list.add(roomChat);
+                    Log.d(TAG,"채팅방 리스트 사이즈"+list.size());
+                    RoomActivity.roomActivity.handler.sendEmptyMessage(0);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 }

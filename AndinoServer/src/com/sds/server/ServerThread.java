@@ -85,6 +85,9 @@ public class ServerThread extends Thread {
 				sb.append("]");
 				sb.append("}");
 				System.out.println(list.size()+","+sb.toString());
+				for(int i=0;i<serverMain.threadList.size();i++){
+					((ServerThread)serverMain.threadList.get(i)).sendMsg(sb.toString());
+				}
 				break;
 			
 			}

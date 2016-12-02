@@ -1,6 +1,8 @@
 package com.sds.study.andino.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -11,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.sds.study.andino.R;
+import com.sds.study.andino.activity.mainFragment.RoomChatFragment;
+import com.sds.study.andino.adapter.RoomChatItemAdapter;
 import com.sds.study.andino.adapter.RoomPagerAdapter;
 import com.sds.study.andino.network.ClientThread;
 
@@ -24,13 +28,14 @@ import java.net.Socket;
 public class RoomActivity extends AppCompatActivity {
     Toolbar room_toolbar;
     ViewPager roomPage;
-    RoomPagerAdapter roomPagerAdapter;
+    public RoomPagerAdapter roomPagerAdapter;
     ImageView chatting;
    /* public static Socket socket;
     public static ClientThread clientThread;//서버 요청시  사용 할것
     String ip = "192.168.0.28";//필요한 아이피로 바꿀것
     int port = 9090;*/
     String TAG;
+    public Handler handler;
     public static RoomActivity roomActivity;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,22 +53,17 @@ public class RoomActivity extends AppCompatActivity {
         room_toolbar.setTitle("채팅");
         setSupportActionBar(room_toolbar);
 
-       friendList();
+        handler=new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                RoomChatFragment.roomChatItemAdapter.notifyDataSetChanged();
+            }
+        };
+
 
     }
 
-    public void friendList(){
-        StringBuffer sb=new StringBuffer();
 
-        sb.append("{");
-        sb.append("\"title\":\"roomList\",");
-        sb.append("\"content\":\"1\"");
-        sb.append("}");
-        if(LoginActivity.socket!=null) {
-            ClientThread.getInstance().sendMsg(sb.toString());
-        }
-        Log.d(TAG,sb.toString());
-    }
 
     /*메뉴부착*/
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -81,9 +81,23 @@ public class RoomActivity extends AppCompatActivity {
                 break;
             case R.id.menu_chatting:
                 roomPage.setCurrentItem(2);
+                friendList();
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void friendList(){
+        StringBuffer sb=new StringBuffer();
+
+        sb.append("{");
+        sb.append("\"title\":\"roomList\",");
+        sb.append("\"content\":\"1\"");
+        sb.append("}");
+        if(LoginActivity.socket!=null) {
+            ClientThread.getInstance().sendMsg(sb.toString());
+        }
+        Log.d(TAG,sb.toString());
     }
 
 
