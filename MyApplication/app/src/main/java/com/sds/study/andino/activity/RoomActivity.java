@@ -63,8 +63,6 @@ public class RoomActivity extends AppCompatActivity {
 
     }
 
-
-
     /*메뉴부착*/
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.room_menu, menu);

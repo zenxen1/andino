@@ -12,7 +12,7 @@ public class AcceptThread extends Thread{
 	public AcceptThread(ServerMain serverMain) {
 		this.serverMain=serverMain;
 		try {
-			serverSocket=new ServerSocket(port);
+			serverSocket=new ServerSocket(Integer.parseInt(serverMain.tf_port.getText()));
 			serverMain.area.append("서버가동\n");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -33,7 +33,5 @@ public class AcceptThread extends Thread{
 				e.printStackTrace();
 			}
 		}
-		
 	}
-
 }

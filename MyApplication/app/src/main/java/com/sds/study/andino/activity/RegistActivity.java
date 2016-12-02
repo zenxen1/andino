@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.sds.study.andino.R;
+import com.sds.study.andino.network.ClientThread;
 
 /**
  * Created by 김승현 on 2016-11-30.
@@ -50,12 +51,26 @@ public class RegistActivity extends AppCompatActivity {
                 Log.d(TAG,sb.toString());*/
 
 
-
+                enroll();
 
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
             }
         });
+    }
+
+    public void enroll(){
+        StringBuffer sb = new StringBuffer();
+        sb.append("{");
+        sb.append("\"title\":\"regist\",");
+        sb.append("\"name\":\"" + name.getText().toString() + "\",");
+        sb.append("\"id\":\"" + regist_id.getText().toString() + "\",");
+        sb.append("\"password\":\"" + regist_pass.getText().toString()+ "\",");
+        sb.append("\"nickname\":\"" + regist_email.getText().toString()+"\"");
+        sb.append("}");
+
+        Log.d(TAG,sb.toString());
+        ClientThread.getInstance().sendMsg(sb.toString());
     }
 
 }

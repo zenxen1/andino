@@ -51,9 +51,11 @@ public class BaloonAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         Speech dto=(Speech) list.get(i);
-
-            view=new ItemRightBaloon(chatActivity,dto);
-
+        if(dto.getId().equals("0")) {
+            view = new ItemRightBaloon(chatActivity, dto);
+        }else{
+            view=new ItemLeftBaloon(chatActivity,dto);
+        }
         return view;
     }
 }

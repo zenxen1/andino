@@ -27,39 +27,44 @@ import java.util.ArrayList;
 public class ClientThread extends Thread {
     BufferedReader buffr;
     BufferedWriter buffw;
-    boolean flag=true;
+    boolean flag = true;
     PackageInfo info;
     String TAG;
     private static ClientThread instance;
+
     private ClientThread() {
-        TAG=this.getClass().getName();
+        TAG = this.getClass().getName();
         try {
-            buffr=new BufferedReader(new InputStreamReader(LoginActivity.socket.getInputStream(),"utf-8"));
-            buffw=new BufferedWriter(new OutputStreamWriter(LoginActivity.socket.getOutputStream(),"utf-8"));
+            buffr = new BufferedReader(new InputStreamReader(LoginActivity.socket.getInputStream(), "utf-8"));
+            buffw = new BufferedWriter(new OutputStreamWriter(LoginActivity.socket.getOutputStream(), "utf-8"));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
-    public static ClientThread getInstance(){
-        if(instance==null){
-            instance=new ClientThread();
-        }
 
+    public static ClientThread getInstance() {
+        if (instance == null) {
+            instance = new ClientThread();
+        }
         return instance;
     }
 
-    public void listen(){
+    public void listen() {
         try {
-            String data=buffr.readLine();
+            String data = buffr.readLine();
             jsonAnalyzer(data);
         } catch (IOException e) {
+            freeConnection();
+            flag = !flag;
             e.printStackTrace();
         }
     }
-    public void sendMsg(String data){
+
+    public void sendMsg(String data) {
         try {
-            buffw.write(data+"\n");
+            Log.d(TAG, data);
+            buffw.write(data + "\n");
             buffw.flush();
         } catch (IOException e) {
             e.printStackTrace();
@@ -67,18 +72,19 @@ public class ClientThread extends Thread {
     }
 
     public void run() {
-        while (flag){
+        while (flag) {
             listen();
         }
 
     }
-    public void jsonAnalyzer(String data){
+
+    public void jsonAnalyzer(String data) {
         try {
-            Log.d(TAG,data);
-            JSONObject jsonObject=new JSONObject(data);
-            String title=(String)jsonObject.getString("title");
-            if(title.equals("chat")){
-                Speech speech=new Speech();
+            Log.d(TAG, data);
+            JSONObject jsonObject = new JSONObject(data);
+            String title = (String) jsonObject.getString("title");
+            if (title.equals("chat")) {
+                Speech speech = new Speech();
                 speech.setId(jsonObject.getString("id"));
                 speech.setContent(jsonObject.getString("content"));
                 speech.setTime("11:00");
@@ -104,5 +110,32 @@ public class ClientThread extends Thread {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void freeConnection() {
+        if (buffr != null) {
+            try {
+                buffr.close();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        }
+        buffr = null;
+        if (buffw != null) {
+            try {
+                buffw.close();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        }
+        buffw = null;
+        if (LoginActivity.socket != null) {
+            try {
+                LoginActivity.socket.close();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        }
+        LoginActivity.socket = null;
     }
 }

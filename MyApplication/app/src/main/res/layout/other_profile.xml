@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.14"
+        android:orientation="vertical">
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.74">
+
+            <ImageView
+                android:id="@+id/imgback"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/background1" />
+
+
+            <com.sds.study.andino.RoundProfile
+                android:id="@+id/profile_pic"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_gravity="center"
+                android:translationY="155dp"
+                android:src="@drawable/i17" />
+
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/profile_name"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:gravity="center"
+        android:paddingTop="15dp"
+        android:text="상대방 이름"
+        android:textSize="25sp" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/self_chat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
+            android:paddingRight="40dp"
+            android:src="@drawable/profile_write" />
+
+        <ImageButton
+            android:id="@+id/bt_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
+            android:src="@drawable/profile_setting" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
