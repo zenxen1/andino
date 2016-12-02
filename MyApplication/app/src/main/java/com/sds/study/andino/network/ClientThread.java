@@ -93,7 +93,7 @@ public class ClientThread extends Thread {
             }else if(title.equals("roomList")){
                 Log.d(TAG,"들어오냐??");
                 JSONArray jsonArray = jsonObject.getJSONArray("roomList");
-                for(int i=0;i<1;i++){
+                for(int i=0;i<jsonArray.length();i++){
                     JSONObject obj = jsonArray.getJSONObject(i);
                     RoomChat roomChat = new RoomChat();
                     roomChat.setContent(obj.getString("content"));

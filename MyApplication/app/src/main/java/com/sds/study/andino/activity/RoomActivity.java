@@ -50,7 +50,7 @@ public class RoomActivity extends AppCompatActivity {
 
         /*툴바생성*/
         room_toolbar = (Toolbar) findViewById(R.id.room_toolbar);
-        room_toolbar.setTitle("채팅");
+        room_toolbar.setTitle("친구리스트");
         setSupportActionBar(room_toolbar);
 
         handler=new Handler(){

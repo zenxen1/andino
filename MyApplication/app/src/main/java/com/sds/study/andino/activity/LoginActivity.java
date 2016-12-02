@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     public static Socket socket;
     public static ClientThread clientThread;//서버 요청시  사용 할것
 
-    String ip = "192.168.0.28";//필요한 아이피로 바꿀것
+    String ip = "192.168.0.18";//필요한 아이피로 바꿀것
   /*  String ip = "192.168.0.16";//필요한 아이피로 바꿀것*/
 
     int port = 9090;

@@ -4,10 +4,11 @@
     android:layout_height="match_parent">
 
     <ImageView
+        android:adjustViewBounds="true"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="2"
-        android:src="@drawable/chatting"/>
+        android:src="@drawable/profilepic"/>
 
     <TextView
         android:id="@+id/content"
@@ -21,7 +22,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="2"
-        android:text="시간"
+        android:text="오후 1:39"
         android:gravity="center"/>
 
 </LinearLayout>
